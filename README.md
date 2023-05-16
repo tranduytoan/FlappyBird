@@ -54,7 +54,7 @@ Bạn cũng có thể download mã nguồn và chạy file **make.bat** để bu
 
 Game mới chỉ là dự án đầu tiên của mình nên vẫn chưa hoàn thiện các tính năng so với game gốc. Mình đang có dự định tiếp tục phát triển các tính năng về Main Menu (với các setting về âm thanh, theme, độ khó, xem lịch sử chơi,xem điểm số cao nhất), Tab Pause (Mute/Unmute, đổi theme, thoát ra Main Menu).
 
-# Đóng góp <a name="đong-gop"></a>
+# Đóng góp <a name="dong-gop"></a>
 
 Nếu bạn muốn đóng góp cho dự dán, đừng ngại tạo một PR. Mình rất cảm ơn bất kể đóng góp nào của các bạn.
 
