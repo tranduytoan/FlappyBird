@@ -7,6 +7,10 @@ bool bird::init()
     posBird.setPos(75, SCREEN_HEIGHT / 2 - 10);
     ahead = 0;
     angle = 0;
+    frame = 1;
+    
+    birdClip = {50, 0, BIRD_WIDTH, BIRD_HEIGHT};
+
     if (Texture == NULL)
     {
         if (Load("res/image/bird.png")) return true;
@@ -20,26 +24,35 @@ void bird::Free()
 }
 
 void bird::render()
-{
-    Render(posBird.x, posBird.y, angle);
+{ 
+    Render(posBird.x, posBird.y, angle, &birdClip);
+
+    //update animation
+    if (frame == 10)
+    {
+       if (birdClip.x == 100) birdClip.x = 0;
+       else birdClip.x += 50;
+       frame = 1;
+    }
+    else frame++;
 }
 
 void bird::deathFall()
 {
     if (posBird.y < SCREEN_HEIGHT - LAND_HEIGHT - BIRD_HEIGHT)
     {
-        if (angle < 70 && time > 30)
+        if (angle < 90)
         {
-            angle += 3;
+            angle += 6;
         }
 
-        if (time >= 0)
-        {
-            // x = x0 + v0.t + 1/2.gt^2
-            posBird.y = x0 - 7.3 * time + time * time * 0.18;
-            time++;
-        }
+        posBird.y = x0 + time * time * 0.05;
+        if (posBird.y > SCREEN_HEIGHT - LAND_HEIGHT - BIRD_HEIGHT) posBird.y = SCREEN_HEIGHT - LAND_HEIGHT - BIRD_HEIGHT;
+        time ++;
     }
+
+    //cố định animation
+    birdClip.x = 50;
 }
 
 
@@ -65,21 +78,24 @@ void bird::update(int pipeWidth,int pipeHeight)
         }
 
 
+
         // va chạm cột
-        if ( (posBird.x + getWidth() > posPipe[ahead].x + 5) && (posBird.x + 5 < posPipe[ahead].x + pipeWidth) &&
-             (posBird.y + 5 < posPipe[ahead].y + pipeHeight || posBird.y  + getHeight() > posPipe[ahead].y + pipeHeight + PIPE_SPACE + 5) )
+        if ( (posBird.x + BIRD_WIDTH > posPipe[ahead].x) && (posBird.x < posPipe[ahead].x + pipeWidth) &&
+             (posBird.y + 5 < posPipe[ahead].y + pipeHeight || posBird.y  + BIRD_HEIGHT > posPipe[ahead].y + pipeHeight + PIPE_SPACE + 5) )
         {
             die = true;
+            x0 = posBird.y;
         }
 
         //chạm nóc/sàn
         if (posBird.y > SCREEN_HEIGHT - LAND_HEIGHT -  BIRD_HEIGHT - 5 || posBird.y < - 10 )
         {
             die = true;
+            x0 = posBird.y;
         }
         
         // vượt qua
-        else if (posBird.x > posPipe[ahead].x + pipeWidth/2 )
+        else if (posBird.x > posPipe[ahead].x + pipeWidth )
         {
             ahead = ( ahead + 1 ) % TOTAL_PIPE;
             score++;

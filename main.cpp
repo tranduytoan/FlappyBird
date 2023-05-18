@@ -53,16 +53,18 @@ int main(int argc, char** argv)
                     //check replay
                     if (game.Input.Type == game::input::CLICK || game.Input.Type == game::input::SPACE)
                     {
-                        if (game.checkPlayButton()) isGameOverMenu = false; //nếu replay thì thoát game over menu -> start menu
+                        if (game.checkPlayButton()) 
+                        {
+                            isGameOverMenu = false; //nếu replay thì thoát game over menu -> start menu
+                            //khởi tạo lại dữ liệu
+                            game.pipe.init();
+                            game.bird.init();
+                        }
                         game.resetInput();
                     }
                 }
                 else //nếu ở start menu
                 {
-                    //khởi tạo lại dữ liệu
-                    game.pipe.init();
-                    game.bird.init();
-
                     //render start menu
                     game.bird.render();
                     game.renderTutorial();

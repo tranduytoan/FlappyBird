@@ -36,7 +36,7 @@ void pipe::render()
             //render ống trên
             Render(posPipe[i].x, posPipe[i].y);
             //render ống dưới
-            Render(posPipe[i].x, posPipe[i].y + height() + PIPE_SPACE, 180);
+            Render(posPipe[i].x, posPipe[i].y + height() + PIPE_SPACE, 0, NULL, SDL_FLIP_VERTICAL);
         }
     }
 }

@@ -19,6 +19,8 @@ public:
 private:
     int angle, time;
     int x0;
+    int frame; // biến đếm frame ngoài main
+    SDL_Rect birdClip; // biến lưu rect lấy khung hình chim trong 3 khung hình
     int ahead = 0; // chỉ số của cột trước mặt
     position posBird;
 };
