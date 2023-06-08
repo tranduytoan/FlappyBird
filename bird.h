@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class bird:LTexture
+class bird : public LTexture
 {
 public:
     bool init();
@@ -17,7 +17,8 @@ public:
 
     void update(int pipeWidth, int pipeHeight);
 private:
-    int angle, time;
+    double time;
+    int angle;
     int x0;
     int frame; // biến đếm frame ngoài main
     SDL_Rect birdClip; // biến lưu rect lấy khung hình chim trong 3 khung hình

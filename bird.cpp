@@ -34,7 +34,7 @@ void bird::render()
        else birdClip.x += 50;
        frame = 1;
     }
-    else frame++;
+    else frame += 1 * 60.0/FPS;
 }
 
 void bird::deathFall()
@@ -43,12 +43,12 @@ void bird::deathFall()
     {
         if (angle < 90)
         {
-            angle += 6;
+            angle += 6 * 60.0/FPS;
         }
 
-        posBird.y = x0 + time * time * 0.05;
+        posBird.y = x0 + time * time * 0.18;
         if (posBird.y > SCREEN_HEIGHT - LAND_HEIGHT - BIRD_HEIGHT) posBird.y = SCREEN_HEIGHT - LAND_HEIGHT - BIRD_HEIGHT;
-        time ++;
+        time += 1 * 60.0/FPS;
     }
 
     //cố định animation
@@ -68,13 +68,13 @@ void bird::update(int pipeWidth,int pipeHeight)
         }
         else if (angle < 90 && time > 30)
         {
-            angle += 3;
+            angle += 3 * 60.0/FPS;
         }
 
         if (time >= 0)
         {
             posBird.y = x0 - 7.3 * time + time * time * 0.18;
-            time++;
+            time += 1 * 60.0/FPS;
         }
 
 

@@ -32,6 +32,14 @@ public:
 
     ~game();
 
+    void setGameFPS(int fps)
+    {
+        bird.FPS = fps;
+        pipe.FPS = fps;
+        land.FPS = fps;
+    }
+    int getFPS() {return FPS;}
+
     bool initGraphic();
     void releaseGraphic();
 

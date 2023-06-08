@@ -41,5 +41,5 @@ void land::render()
 
 void land::update()
 {
-    posLand.x -= 3;
+    posLand.x -= 3 * 60.0/FPS;
 }

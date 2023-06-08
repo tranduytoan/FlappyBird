@@ -9,7 +9,7 @@ using namespace std;
 //vector chứa tọa độ tất cả ống
 extern vector<position> posPipe;
 
-class pipe:LTexture
+class pipe : public LTexture
 {
 private:
     //pos cao nhất pipe bên trên spawn

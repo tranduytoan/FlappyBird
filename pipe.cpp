@@ -55,7 +55,7 @@ void pipe::update()
         }
         else
         {
-            posPipe[i].x -= 3;
+            posPipe[i].x -= 3 * 60.0/FPS;
         }
     }
 }

@@ -6,8 +6,8 @@
 using namespace std;
 
 //set limit FPS
-const short int FPS = 60;
-const short int frameDelay = 1000 / FPS;
+const int FPS = 120;
+const int frameDelay = 1000/FPS;
 
 
 int main(int argc, char** argv)
@@ -16,68 +16,63 @@ int main(int argc, char** argv)
     Uint32 frameEndTime;
 
     game game;
+    game.setGameFPS(FPS);
+
     bool isGameOverMenu = false;
     bool isPause = false;
 
     while(!game.isQuit())
     {
         frameStartTime = SDL_GetTicks();
-        
+
         if (game.isDie())
         {
-            if (isGameOverMenu) game.sound.playDie();
+            //default render
+            game.renderBackground();
+            game.pipe.render();
+            game.land.render();
+            
+            game.takeInput();
 
-            //vòng lặp game over menu và start menu
-            while(game.isDie() && !game.isQuit())
+            if (isGameOverMenu) //nếu ở game over menu
             {
-                //default render
-                game.renderBackground();
-                game.pipe.render();
-                game.land.render();
-                
-                game.takeInput();
+                //chim tiếp tục rơi xuống đất
+                game.bird.render();
+                game.bird.deathFall();
 
-                if (isGameOverMenu) //nếu ở game over menu
+                //render game over menu
+                game.renderGameOver();
+                game.renderMedal();
+                game.renderScoreSmall();
+                game.renderBestScore();
+                game.renderPlayButton();
+
+                //check replay
+                if (game.Input.Type == game::input::CLICK || game.Input.Type == game::input::SPACE)
                 {
-                    //chim tiếp tục rơi xuống đất
-                    game.bird.render();
-                    game.bird.deathFall();
-
-                    //render game over menu
-                    game.renderGameOver();
-                    game.renderMedal();
-                    game.renderScoreSmall();
-                    game.renderBestScore();
-                    game.renderPlayButton();
-
-                    //check replay
-                    if (game.Input.Type == game::input::CLICK || game.Input.Type == game::input::SPACE)
+                    if (game.checkPlayButton()) 
                     {
-                        if (game.checkPlayButton()) 
-                        {
-                            isGameOverMenu = false; //nếu replay thì thoát game over menu -> start menu
-                            //khởi tạo lại dữ liệu
-                            game.pipe.init();
-                            game.bird.init();
-                        }
-                        game.resetInput();
+                        isGameOverMenu = false; //nếu replay thì thoát game over menu -> start menu
+                        //khởi tạo lại dữ liệu
+                        game.pipe.init();
+                        game.bird.init();
                     }
+                    game.resetInput();
                 }
-                else //nếu ở start menu
+            }
+            else //nếu ở start menu
+            {
+                //render start menu
+                game.bird.render();
+                game.renderTutorial();
+
+                //check start play
+                if (game.Input.Type == game::input::CLICK || game.Input.Type == game::input::SPACE)
                 {
-                    //render start menu
-                    game.bird.render();
-                    game.renderTutorial();
-
-                    //check start play
-                    if (game.Input.Type == game::input::CLICK || game.Input.Type == game::input::SPACE)
-                    {
-                        game.Restart(); //die = false, thoát vòng lặp start menu
-                    }
-                    //land luôn chạy trong start menu
-                    game.land.update();
+                    game.Restart(); //die = false, thoát vòng lặp start menu
                 }
-                game.display();
+                //land luôn chạy trong start menu
+                game.land.update();
             }
         }
         else //PLAYING
@@ -108,7 +103,12 @@ int main(int argc, char** argv)
                 game.pipe.update();
                 game.land.update();
 
-                if (game.isDie()) isGameOverMenu = true;
+                if (game.isDie())
+                {
+                    isGameOverMenu = true;
+                    game.sound.playDie();
+                    game.bird.resetTime();
+                }
             }
             else //pause tab
             {
@@ -123,14 +123,13 @@ int main(int argc, char** argv)
                 {
                     if (game.checkPlayButton())
                     {
-                        isPause = 0;
+                        isPause = false;
                     }
                     game.resetInput();
                 }
             }
-            game.display();
         }
-
+        game.display();
         //Limit FPS
         frameEndTime = SDL_GetTicks();
         if (frameDelay > (frameEndTime-frameStartTime))
