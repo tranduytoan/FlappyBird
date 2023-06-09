@@ -29,16 +29,6 @@ void LTexture::free()
 	}
 }
 
-int LTexture::getWidth()
-{
-	return tWidth;
-}
-
-int LTexture::getHeight()
-{
-	return tHeight;
-}
-
 void LTexture::Render(int x, int y, int angle, SDL_Rect* clip, SDL_RendererFlip flip)
 {
 	SDL_Rect Rec_Render = { x, y, tWidth, tHeight };
@@ -82,10 +72,4 @@ bool LTexture::Load(string path)
 
 	return Texture != NULL;
 
-}
-
-void position::setPos(const int _x, const int _y)
-{
-    x = _x;
-    y = _y;
 }

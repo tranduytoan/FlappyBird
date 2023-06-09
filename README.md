@@ -60,7 +60,7 @@ Nếu bạn muốn đóng góp cho dự dán, đừng ngại tạo một PR. Mì
 
 # Tài liệu tham khảo <a name="tham-khao"></a>
 
-[Flappy Bird](https://wikipedia.org/wiki/Flappy_Bird) 
+[Flappy Bird](https://github.com/Ducanger/Flappy-Doge-SDL2) 
 
 [SDL2](https://wiki.libsdl.org/SDL2/FrontPage)
 

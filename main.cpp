@@ -99,7 +99,7 @@ int main(int argc, char** argv)
                     game.bird.resetTime(); 
                     game.resetInput();
                 }
-                game.bird.update(game.getPipeWidth(), game.getPipeHeight());
+                game.bird.update(game.pipe.tWidth, game.pipe.tHeight);
                 game.pipe.update();
                 game.land.update();
 

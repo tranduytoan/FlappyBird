@@ -27,8 +27,8 @@ void bird::render()
 { 
     Render(posBird.x, posBird.y, angle, &birdClip);
 
-    //update animation
-    if (frame == 10)
+    //update animation mỗi 1/6 s
+    if (frame >= 10)
     {
        if (birdClip.x == 100) birdClip.x = 0;
        else birdClip.x += 50;

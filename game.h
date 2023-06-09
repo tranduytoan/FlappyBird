@@ -66,9 +66,6 @@ public:
 
     bool isQuit() {return quit;}
     bool isDie() {return die;}
-
-    int getPipeWidth() {return pipe.width();}
-    int getPipeHeight() {return pipe.height();}
 private: 
     int bestScore;
 };

@@ -12,8 +12,12 @@ using namespace std;
 class position
 {
 public:
-    int x, y, angle, state;
-    void setPos(const int x, const int y);
+    double x, y;
+    void setPos(const double _x, const double _y)
+    {
+        x = _x;
+        y = _y;
+    }
 };
 
 class LTexture
@@ -23,9 +27,6 @@ public:
     ~LTexture();
 
     bool Load(string path);
-
-    int getWidth();
-    int getHeight();
 
     void Render(int x, int y, int angle = 0, SDL_Rect* clip = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
     void free();

@@ -21,7 +21,4 @@ public:
     void Free();
     void render();
     void update();
-
-    int width() {return getWidth();}
-    int height() {return getHeight();}
 };

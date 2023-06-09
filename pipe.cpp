@@ -31,12 +31,12 @@ void pipe::render()
     for (char i = 0; i < TOTAL_PIPE; i++)
     {
         // nếu ống đi vào màn hình
-        if (posPipe[i].x <= SCREEN_WIDTH && posPipe[i].x > -width())
+        if (posPipe[i].x <= SCREEN_WIDTH && posPipe[i].x > -tWidth)
         {
             //render ống trên
             Render(posPipe[i].x, posPipe[i].y);
             //render ống dưới
-            Render(posPipe[i].x, posPipe[i].y + height() + PIPE_SPACE, 0, NULL, SDL_FLIP_VERTICAL);
+            Render(posPipe[i].x, posPipe[i].y + tHeight + PIPE_SPACE, 0, NULL, SDL_FLIP_VERTICAL);
         }
     }
 }
@@ -46,7 +46,7 @@ void pipe::update()
     for (char i = 0; i < TOTAL_PIPE; i++)
     {
         //nếu pipe ra ngoài màn hình sẽ nhảy tọa độ ra sau cùng
-        if (posPipe[i].x < -width())
+        if (posPipe[i].x < -tWidth)
         {
             //random lại y
             posPipe[i].y = (rand() % (randMax - randMin + 1)) + randMin;

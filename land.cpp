@@ -21,16 +21,11 @@ void land::Free()
 void land::render()
 {
     // land.png width = screen_width = 350 pixel
-    if (posLand.x > 0)
-    {
-        Render(posLand.x, posLand.y);
-    }
-
     // render 2 land nối nhau
-    else if (posLand.x > -SCREEN_WIDTH && posLand.x <= 0)
+    if (posLand.x > -SCREEN_WIDTH && posLand.x <= 0)
     {
         Render(posLand.x, posLand.y);
-        Render(posLand.x + SCREEN_WIDTH, posLand.y, 0, NULL);
+        Render(posLand.x + SCREEN_WIDTH, posLand.y);
     }
     else // lặp lại tọa độ
     {

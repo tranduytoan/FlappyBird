@@ -165,7 +165,7 @@ void game::renderScoreSmall()
 		}
 
 		//render các số từ phải qua trái, bắt đầu tại 260x268
-		image.Render(260 - image.getWidth() * (len-1-i) - 5 * (len-i-1), 268);
+		image.Render(260 - image.tWidth * (len-1-i) - 5 * (len-i-1), 268);
 	}
 	image.free();
 }
@@ -221,7 +221,7 @@ void game::renderScoreLarge()
 			image.Load("res/number/large/0.png");
 		}
 		// căn giữa
-		image.Render((SCREEN_WIDTH - (image.getWidth() * len + (len-1) * 10)) / 2 + (i+30) * i, 100);
+		image.Render((SCREEN_WIDTH - (image.tWidth * len + (len-1) * 10)) / 2 + (i+30) * i, 100);
 	}
 	image.free();
 }
@@ -280,7 +280,7 @@ void game::renderBestScore()
 		{
 			image.Load("res/number/small/0.png");
 		}
-		image.Render(260 - image.getWidth()*(len-i-1) - 5*(len-i-1), 315);
+		image.Render(260 - image.tWidth*(len-i-1) - 5*(len-i-1), 315);
 	}
 	image.free();
 
@@ -297,7 +297,7 @@ void game::renderTutorial()
 {
 	LTexture image;
 	image.Load("res/image/tutorial.png");
-	image.Render((SCREEN_WIDTH - image.getWidth()) / 2, 240);
+	image.Render((SCREEN_WIDTH - image.tWidth) / 2, 240);
 	image.free();
 }
 
@@ -329,7 +329,7 @@ void game::renderPauseTab()
 {
 	LTexture image;
 	image.Load("res/image/pauseTab.png");
-	image.Render((SCREEN_WIDTH - image.getWidth()) / 2, 230);
+	image.Render((SCREEN_WIDTH - image.tWidth) / 2, 230);
 	image.free();
 }
 
@@ -338,7 +338,7 @@ void game::renderGameOver()
 {
 	LTexture image;
 	image.Load("res/image/gameOver.png");
-	image.Render((SCREEN_WIDTH - image.getWidth()) / 2, 150);
+	image.Render((SCREEN_WIDTH - image.tWidth) / 2, 150);
 	image.free();
 }
 
@@ -358,7 +358,7 @@ void game::renderPlayButton()
 {
 	LTexture image;
 	image.Load("res/image/playButton.png");
-	image.Render((SCREEN_WIDTH - image.getWidth()) / 2, 380);
+	image.Render((SCREEN_WIDTH - image.tWidth) / 2, 380);
 	image.free();
 }
 
